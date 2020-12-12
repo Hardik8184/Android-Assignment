@@ -1,20 +1,28 @@
 plugins {
   id 'com.android.application'
   id 'kotlin-android'
+  id 'kotlin-android-extensions'
+  id 'kotlin-kapt'
+  id "androidx.navigation.safeargs"
 }
 
 android {
-  compileSdkVersion 30
-  buildToolsVersion "30.0.2"
+
+  compileSdkVersion rootProject.compileSdkVersion
+  buildToolsVersion rootProject.buildToolsVersion
 
   defaultConfig {
+
     applicationId "com.android.androidassignment"
-    minSdkVersion 16
-    targetSdkVersion 30
+
+    minSdkVersion rootProject.minSdkVersion
+    targetSdkVersion rootProject.targetSdkVersion
     versionCode 1
     versionName "1.0"
 
+    vectorDrawables.useSupportLibrary = true
     testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    multiDexEnabled true
   }
 
   buildTypes {
@@ -23,23 +31,75 @@ android {
       proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
     }
   }
+
   compileOptions {
     sourceCompatibility JavaVersion.VERSION_1_8
     targetCompatibility JavaVersion.VERSION_1_8
   }
+
   kotlinOptions {
     jvmTarget = '1.8'
+  }
+
+  buildFeatures {
+    dataBinding = true
+    // for view binding :
+    viewBinding = true
+  }
+
+  testOptions {
+    unitTests.returnDefaultValues = true
   }
 }
 
 dependencies {
 
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+  implementation "androidx.multidex:multidex:$rootProject.multidexVersion"
+  implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'
+
+  // required if you want to use Mockito for unit tests
+  testImplementation "org.mockito:mockito-core:$rootProject.mockitoVersion"
+  testImplementation 'org.mockito:mockito-inline:2.23.4'
+
+  // android support libraries
+  implementation "com.google.android.material:material:$rootProject.materialVersion"
+  implementation "androidx.appcompat:appcompat:$rootProject.appCompatVersion"
+  implementation "androidx.cardview:cardview:$rootProject.cardViewVersion"
+  implementation "androidx.recyclerview:recyclerview:$rootProject.recyclerVersion"
+  implementation "androidx.swiperefreshlayout:swiperefreshlayout:$rootProject.swiperefreshlayoutVersion"
+  implementation "androidx.constraintlayout:constraintlayout:$rootProject.constraintlayoutVersion"
   implementation 'androidx.core:core-ktx:1.3.2'
-  implementation 'androidx.appcompat:appcompat:1.2.0'
-  implementation 'com.google.android.material:material:1.2.1'
-  implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
-  testImplementation 'junit:junit:4.+'
-  androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-  androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+  // Navigation
+  implementation "androidx.navigation:navigation-fragment-ktx:$rootProject.navigationVersion"
+  implementation "androidx.navigation:navigation-ui-ktx:$rootProject.navigationVersion"
+
+  // android hsdp
+  implementation "com.hardik.hsdp:scalablesize-android:$rootProject.hsdpVersion"
+
+  // Android Data binding
+  implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.lifecycleVersion"
+
+  // dependency injection
+  implementation "com.google.dagger:dagger:$rootProject.dagger2Version"
+  implementation "com.google.dagger:dagger-android:$rootProject.dagger2Version"
+  implementation "com.google.dagger:dagger-android-support:$rootProject.dagger2Version"
+  kapt "com.google.dagger:dagger-compiler:$rootProject.dagger2Version"
+  kapt "com.google.dagger:dagger-android-processor:$rootProject.dagger2Version"
+
+  // retrofit networking libraries
+  implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofit2Version"
+  implementation "com.squareup.retrofit2:converter-gson:$rootProject.retrofit2Version"
+  implementation "com.squareup.retrofit2:adapter-rxjava2:$rootProject.retrofit2Version"
+  implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.loggingVersion"
+
+  // image
+  implementation "com.github.bumptech.glide:glide:$rootProject.glideVersion"
+  kapt "com.github.bumptech.glide:compiler:$rootProject.glideVersion"
+
+  // reactive
+  implementation "io.reactivex.rxjava2:rxjava:$rootProject.rxjava2Version"
+  implementation "io.reactivex.rxjava2:rxandroid:$rootProject.rxandroidVersion"
 }
