@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.hardik.androidassignment.data.api.ApiRepository
 import com.hardik.androidassignment.data.model.local.DataModel
-import com.hardik.androidassignment.data.model.response.ApiDataResponse
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
@@ -51,12 +50,12 @@ class HomeViewModel @Inject constructor(
 
                   for (i in 0 until response.rows!!.size) {
 
-                    if (response.rows!![i].title!!.isNotEmpty()) {
+                    if (response.rows!![i].title != null) {
                       list.add(
                           DataModel(
                               response.rows!![i].title!!,
-                              response.rows!![i].description!!,
-                              response.rows!![i].imageHref!!
+                              if (response.rows!![i].description == null) "Description Not Available" else response.rows!![i].description!!,
+                              if (response.rows!![i].imageHref == null) "" else response.rows!![i].imageHref!!,
                           )
                       )
                     }
@@ -64,7 +63,7 @@ class HomeViewModel @Inject constructor(
                   }
 
                   _dataList.value = list
-                  _titleData.value = response.title!!
+                  // _titleData.value = response.title!!
 
                 } catch (e: Exception) {
                   println("Hardik error --> " + e.localizedMessage)

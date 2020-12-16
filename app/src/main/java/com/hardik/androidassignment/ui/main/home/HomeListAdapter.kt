@@ -55,7 +55,6 @@ open class HomeListAdapter(
   }
 
   override fun getItemCount(): Int {
-    println("Hardik size --> " + countryDataList.size)
     return countryDataList.size
   }
 }

@@ -34,6 +34,8 @@ class MainActivity : BaseActivity() {
     super.onCreate(savedInstanceState)
     getActivityComponent().inject(this)
 
+    createDatabase()
+
     setDataBinding()
     setToolbar()
   }

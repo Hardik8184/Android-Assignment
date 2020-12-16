@@ -26,7 +26,7 @@ class HomeFragment : BaseFragment() {
   @Inject
   lateinit var viewModelFactory: ViewModelProvider.Factory
 
-  private val dataList = ArrayList<DataModel>()
+  private var dataList = ArrayList<DataModel>()
 
   private val homeFragmentViewModel: HomeViewModel by viewModels {
     viewModelFactory
@@ -46,9 +46,14 @@ class HomeFragment : BaseFragment() {
   ): View {
     binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
     binding.lifecycleOwner = this
-    initUI()
+
 
     return binding.root
+  }
+
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
+    initUI()
   }
 
   private fun initUI() {
@@ -77,6 +82,8 @@ class HomeFragment : BaseFragment() {
           requireActivity(), binding.llHomeRoot,
           getString(R.string.str_no_internet)
       )
+
+      getDataFromDB()
     }
   }
 
@@ -92,13 +99,8 @@ class HomeFragment : BaseFragment() {
     homeFragmentViewModel.dataList.observe(viewLifecycleOwner) { value ->
 
       if (value.size > 0) {
-        setAdapter(value)
-      } else {
-        CommonDataUtility.showErrorSnackBar(
-            requireActivity(),
-            binding.llHomeRoot,
-            "No data found"
-        )
+        mainActivity.dataBaseHelper.insertData(value)
+        getDataFromDB()
       }
     }
 
@@ -118,7 +120,15 @@ class HomeFragment : BaseFragment() {
         CommonDataUtility.showErrorSnackBar(requireActivity(), binding.llHomeRoot, value)
 
     }
+  }
 
+  private fun getDataFromDB() {
+
+    println("Hardik getDataFromDB")
+
+    dataList.clear()
+    dataList = mainActivity.dataBaseHelper.getData()
+    setAdapter(dataList)
   }
 
   /* Set Data to Adapter */
