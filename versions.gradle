@@ -1,0 +1,120 @@
+/*
+ * Copyright (C) 2018 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+
+/**
+ * Shared file between builds so that they can all use the same dependencies and
+ * maven repositories.
+ **/
+ext.deps = [:]
+
+def versions = [:]
+versions.activity = '1.1.0'
+versions.appcompat = "1.1.0"
+versions.core_ktx = "1.2.0"
+versions.junit = "4.12"
+versions.atsl_junit = "1.1.1"
+versions.kotlin = "1.3.61"
+versions.constraint_layout = "1.1.3"
+versions.espresso = "3.2.0"
+versions.android_gradle_plugin = '4.0.0'
+versions.dagger = '2.16'
+versions.rxandroid = '3.0.0'
+versions.rxjava = '3.0.0'
+versions.retrofit = '2.7.2'
+versions.gson = '2.7.2'
+versions.hsdp = '1.0.1'
+versions.rxjava3_adapter = '3.0.0'
+versions.okhttp3 = '4.4.0'
+versions.okhttp3 = '4.4.0'
+versions.viewmodel = '2.2.0'
+versions.multidex_version = '2.0.1'
+versions.swiperefreshlayout = "1.1.0"
+versions.material = "1.2.0-alpha05"
+versions.glide = "4.11.0"
+versions.navigation = "2.3.2"
+versions.navigation_safe_args = "1.0.0"
+ext.versions = versions
+
+def atsl = [:]
+atsl.ext_junit = "androidx.test.ext:junit:$versions.atsl_junit"
+deps.atsl = atsl
+
+def kotlin = [:]
+kotlin.stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin"
+kotlin.plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
+deps.kotlin = kotlin
+
+def dagger = [:]
+dagger.compiler = "com.google.dagger:dagger-compiler:$versions.dagger"
+dagger.annotation = "com.google.dagger:dagger-android-processor:$versions.dagger"
+dagger.support = "com.google.dagger:dagger-android-support:$versions.dagger"
+deps.dagger = dagger
+
+def espresso = [:]
+espresso.core = "androidx.test.espresso:espresso-core:$versions.espresso"
+deps.espresso = espresso
+
+def rxjava = [:]
+rxjava.rxjava = "io.reactivex.rxjava3:rxjava:$versions.rxjava"
+rxjava.rxandroid = "io.reactivex.rxjava3:rxandroid:$versions.rxandroid"
+deps.rxjava = rxjava
+
+def retrofit = [:]
+retrofit.retrofit = "com.squareup.retrofit2:retrofit:$versions.retrofit"
+retrofit.gson = "com.squareup.retrofit2:converter-gson:$versions.gson"
+retrofit.rxjava3_adapter = "com.github.akarnokd:rxjava3-retrofit-adapter:$versions.rxjava3_adapter"
+retrofit.okhttp3 = "com.squareup.okhttp3:logging-interceptor:$versions.okhttp3"
+deps.retrofit = retrofit
+
+def lifecycle = [:]
+lifecycle.viewmodel = "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.viewmodel"
+deps.lifecycle = lifecycle
+
+def activity = [:]
+activity.activity_ktx = "androidx.activity:activity-ktx:$versions.activity"
+deps.activity = activity
+
+def glide = [:]
+glide.glide = "com.github.bumptech.glide:glide:$versions.glide"
+glide.glide_annotation = "com.github.bumptech.glide:compiler:$versions.glide"
+deps.glide = glide
+
+def navigation = [:]
+navigation.fragment_ktx = "androidx.navigation:navigation-fragment-ktx:$versions.navigation"
+navigation.ui_ktx = "androidx.navigation:navigation-ui-ktx:$versions.navigation"
+deps.navigation=navigation
+
+deps.swiperefreshlayout = "androidx.swiperefreshlayout:swiperefreshlayout:$versions.swiperefreshlayout"
+deps.material = "com.google.android.material:material:$versions.material"
+deps.multidex = "androidx.multidex:multidex:$versions.multidex_version"
+deps.hsdp = "com.hardik.hsdp:scalablesize-android:$versions.hsdp"
+deps.android_gradle_plugin = "com.android.tools.build:gradle:$versions.android_gradle_plugin"
+deps.app_compat = "androidx.appcompat:appcompat:$versions.appcompat"
+deps.core_ktx = "androidx.core:core-ktx:$versions.core_ktx"
+deps.constraint_layout = "androidx.constraintlayout:constraintlayout:$versions.constraint_layout"
+deps.navigation_safe_args = "androidx.navigation:navigation-safe-args-gradle-plugin:$versions.navigation"
+deps.junit = "junit:junit:$versions.junit"
+
+ext.deps = deps
+
+static def addRepos(RepositoryHandler handler) {
+    handler.google()
+    handler.jcenter()
+    handler.maven { url "https://oss.jfrog.org/libs-snapshot" }
+}
+
+ext.addRepos = this.&addRepos

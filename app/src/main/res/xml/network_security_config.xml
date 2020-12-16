@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <base-config cleartextTrafficPermitted="true">
+        <trust-anchors>
+            <!-- Trust only system CAs only for release -->
+            <certificates src="system" />
+        </trust-anchors>
+    </base-config>
+<!--    <debug-overrides cleartextTrafficPermitted="true">-->
+<!--        <trust-anchors>-->
+<!--            &lt;!&ndash; Trust user added CAs while debuggable only &ndash;&gt;-->
+<!--            <certificates src="user" />-->
+<!--            <certificates src="system" />-->
+<!--        </trust-anchors>-->
+<!--    </debug-overrides>-->
+    <!--    <domain-config>
+            <domain includeSubdomains="true">nykaa.com</domain>
+            <pin-set >
+                <pin digest="SHA-256">FD6NQ3kkypadXi4DFNaqq1G1ZcDkB+wYV3YjD5WuQG4=</pin>
+                &lt;!&ndash; backup pin &ndash;&gt;
+                <pin digest="SHA-256">+CZzlPfErjhJMrT5W02N+gAQfs3T8MXTxV4qCRTEmTY=</pin>
+            </pin-set>
+        </domain-config>-->
+</network-security-config>
