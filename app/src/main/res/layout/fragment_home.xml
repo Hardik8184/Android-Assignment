@@ -2,27 +2,24 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-  <data>
-
-    <import type="android.view.View" />
-
-    <variable
-        name="viewModel"
-        type="com.android.androidassignment.ui.home.HomeFragmentViewModel" />
-
-  </data>
-
   <LinearLayout
-      android:id="@+id/llRoot"
+      android:id="@+id/ll_home_root"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:orientation="vertical"
       tools:context=".login.view.LoginActivity">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_data"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeContainer"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
+
+      <androidx.recyclerview.widget.RecyclerView
+          android:id="@+id/rv_data"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent" />
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
   </LinearLayout>
 

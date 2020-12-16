@@ -3,33 +3,32 @@ plugins {
   id 'kotlin-android'
   id 'kotlin-android-extensions'
   id 'kotlin-kapt'
-  id "androidx.navigation.safeargs"
+  id "androidx.navigation.safeargs.kotlin"
 }
+
+//apply plugin: 'com.android.application'
+//apply plugin: 'kotlin-android'
+//apply plugin: 'kotlin-android-extensions'
+//apply plugin: 'kotlin-kapt'
+//apply plugin: "androidx.navigation.safeargs.kotlin"
 
 android {
 
-  compileSdkVersion rootProject.compileSdkVersion
-  buildToolsVersion rootProject.buildToolsVersion
+  compileSdkVersion 30
+  buildToolsVersion "29.0.3"
 
   defaultConfig {
+    applicationId "com.hardik.androidassignment"
 
-    applicationId "com.android.androidassignment"
-
-    minSdkVersion rootProject.minSdkVersion
-    targetSdkVersion rootProject.targetSdkVersion
+    minSdkVersion 17
+    targetSdkVersion 30
     versionCode 1
     versionName "1.0"
 
     vectorDrawables.useSupportLibrary = true
     testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     multiDexEnabled true
-  }
 
-  buildTypes {
-    release {
-      minifyEnabled false
-      proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-    }
   }
 
   compileOptions {
@@ -38,7 +37,25 @@ android {
   }
 
   kotlinOptions {
-    jvmTarget = '1.8'
+    jvmTarget = "1.8"
+  }
+
+  dexOptions {
+    preDexLibraries = false
+    javaMaxHeapSize "4g"
+  }
+
+  buildTypes {
+    debug {
+      debuggable true
+      minifyEnabled false
+      proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+    }
+    release {
+      debuggable false
+      minifyEnabled false
+      proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+    }
   }
 
   buildFeatures {
@@ -47,8 +64,11 @@ android {
     viewBinding = true
   }
 
-  testOptions {
-    unitTests.returnDefaultValues = true
+  lintOptions {
+    checkReleaseBuilds false
+    // Or, if you prefer, you can continue to check for errors in release builds,
+    // but continue the build even when errors are found:
+    abortOnError false
   }
 }
 
