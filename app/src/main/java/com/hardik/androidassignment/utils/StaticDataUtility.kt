@@ -1,4 +1,4 @@
-package com.hardik.mvvmapp.utils.helper
+package com.hardik.androidassignment.utils
 
 object StaticDataUtility {
 

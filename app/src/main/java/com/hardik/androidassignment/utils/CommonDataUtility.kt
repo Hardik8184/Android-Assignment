@@ -15,7 +15,6 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.hardik.androidassignment.R
 import com.google.android.material.snackbar.Snackbar
-import com.hardik.mvvmapp.utils.helper.StaticDataUtility
 
 /**
  * Created by admin on 25/01/18.

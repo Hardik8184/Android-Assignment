@@ -2,7 +2,7 @@ package com.hardik.androidassignment.di.module
 
 import com.hardik.androidassignment.data.api.ApiCalls
 import com.hardik.androidassignment.di.scope.ApplicationScope
-import com.hardik.mvvmapp.utils.helper.StaticDataUtility
+import com.hardik.androidassignment.utils.StaticDataUtility
 import dagger.Module
 import dagger.Provides
 //import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory
